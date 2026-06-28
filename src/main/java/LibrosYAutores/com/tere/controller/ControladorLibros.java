@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControladorLibros {
@@ -25,14 +27,6 @@ public class ControladorLibros {
     return "libros.jsp";
   }
 
-  // obtenerInformacionDeLibro(): Método que responde a la ruta /libros/{nombre} y
-  // retorna la información de un libro en específico, devuelve el nombre del
-  // libro y su autor
-  // al JSP llamado detalleLibro.jsp..
-  // En caso de que el libro no exista en la lista
-  // devolver un mensaje como el siguiente: «El libro no se encuentra en nuestra
-  // lista.»
-
   @GetMapping("/libros/{nombre}")
   public String obtenerInformacionDeLibro(@PathVariable String nombre, Model model) {
     if (listaLibros.containsKey(nombre)) {
@@ -42,5 +36,21 @@ public class ControladorLibros {
       model.addAttribute("mensaje", "«El libro no se encuentra en nuestra lista.»");
     }
     return "detalleLibro.jsp";
+  }
+  // formularioLibro(): Método que responde a la ruta /libros/formulario
+  // y retorna un JSP llamado formularioLibros.jsp
+  // para cargar un formulario para poder dar de alta un nuevo libro
+  // y su respectivo autor.
+
+  @GetMapping("/libros/formulario")
+  public String formularioLibro() {
+    return "formularioLibros.jsp";
+  }
+
+  @PostMapping("/libros/procesar/libro")
+  public String procesaLibro(@RequestParam(value = "nuevoLibro") String nuevoLibro,
+      @RequestParam(value = "autorNuevo") String autorNuevo) {
+    listaLibros.put(nuevoLibro, autorNuevo);
+    return "redirect:/libros";
   }
 }
