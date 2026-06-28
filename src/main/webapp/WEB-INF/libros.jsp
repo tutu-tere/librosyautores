@@ -12,7 +12,9 @@ uri="http://java.sun.com/jsp/jstl/core" %>
 <h1>Libros disponibles</h1>
 <ul>
   <c:forEach var="libro" items="${listaLibros}">
-    <li>${libro.key} - ${libro.value}</li>
+    <li>
+      <a href="/libros/${libro.key}"> ${libro.key}</a>    
+    </li>
   </c:forEach>
 </ul>
   </body>

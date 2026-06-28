@@ -17,5 +17,8 @@ uri="http://java.sun.com/jsp/jstl/core" %>
       <input type="text" id="autorNuevo" name="autorNuevo" />
       <button>Agregar</button>
     </form>
+    <form action="/libros" method="get">
+      <button type="submit">Volver a la lista</button>
+    </form>
   </body>
 </html>

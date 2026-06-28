@@ -14,21 +14,14 @@ uri="http://java.sun.com/jsp/jstl/core" %>
     <c:choose>
         <c:when test="${not empty nombreLibro}">
             <h2>${nombreLibro}</h2>
-            
-            <div class="container">
-              <div class="cajita">
-                <ul>
-                  <c:forEach var="autor" items="${autores}">
-                    <li>${autor}</li>
-                  </c:forEach>
-                </ul>
-              </div>
-            </div>
+            <p><strong>Autor:</strong> ${autores}</p>
         </c:when>
         <c:otherwise>
             <p style="color:red;">${mensaje}</p>
         </c:otherwise>
     </c:choose>
-
+    <form action="/libros" method="get">
+    <button type="submit">Volver a la lista</button>
+  </form>
 </body>
 </html>
